@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:3</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: twinkle 5s infinite alternate; 
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #fff; 
+            pointer-events: none;
+            animation: shootingStar 1s linear;
+        }
+
+        .window {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            background-color: #c0c0c0;
+            border: 2px solid #c0c0c0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .title-bar {
+            background-color: #022a2a;
+            color: #fff;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+
+        .menu-bar {
+            background-color: #a0a0a0;
+            padding: 5px;
+            font-size: small;
+        }
+
+        .action-buttons {
+            display: flex;
+        }
+
+        .action-button {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .timer {
+            text-align: center;
+            margin-top: 45px;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 30px;
+            font-family: Consolas;
+        }
+
+        .text-timer {
+            text-align: center;
+            margin-top: 80px;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 30px;
+            font-family: Consolas;
+        }
+
+        .windows98-button {
+            position: absolute;
+            background-color: #c0c0c0;
+            border: 1px solid #022a2a;
+            color: #022a2a;
+            padding: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Add a small shadow */
+        }
+
+        #next-button {
+            bottom: 10px;
+            right: 20px;
+        }
+
+        #previous-button {
+            bottom: 10px;
+            right: 70px;
+        }
+
+        .text {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: white;
+            font-size: 15px;
+            font-family: Consolas;
+        }
+
+        .mute-button {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .image {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 60px;
+            height: auto; 
+        }
+
+        .frame {
+            position: absolute;
+            bottom: 75px;
+            left: 50px;
+            /* width: 150px; */
+            border: 3px solid #ccc;
+            background: #eee;
+            margin: auto;
+            padding: 15px 10px;
+        }
+
+        .memory-photo {
+            width: 150px;
+            height: auto; 
+        }
+
+        .photo-caption {
+            text-align: center;
+            margin-top: 100px;
+            margin-left: 250px;
+            margin-right: 40px;
+            font-size: 30px;
+            font-family: Consolas;
+        }
+
+        .sub-caption {
+            font-size: 15px;
+        }
+
+        #hidden-text {
+            position: absolute;
+            color: white;
+            font-size: 15px;
+            font-family: Consolas;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(-50vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div id="hidden-text">
+        i miss you more.
+    </div>
+
+    <div class="window">
+        <div class="title-bar">
+            <span>⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆ </span>
+            <div class="action-buttons">
+                <div class="action-button" onclick="minimizeWindow()">_</div>
+                <div class="action-button" onclick="minimizeWindow()">❐</div>
+                <div class="action-button" onclick="closeWindow()">X</div>
+            </div>
+        </div>
+        <div class="menu-bar">
+            File | Edit | View
+        </div>
+
+        <div id="window-content"> </div>
+
+        <div class="windows98-button" id="next-button" onclick="nextWindow()" style="display: block;">next</div>
+        <div class="windows98-button" id="previous-button" onclick="prevWindow()" style="display: none;">previous</div>
+        
+        <img src="assets/gif/hk_teddy.png" alt="Hello kitty" class="image">
+    
+    </div>
+
+    <div class="mute-button" onclick="toggleMute()">♬</div>
+    </div>
+
+    <div class="text" id="text">⋆｡ Made with love, Aymen</div>
+
+    <audio id="backgroundAudio" autoplay loop>
+        <source src="sound.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+
+
+        const ilym = document.querySelector('#hidden-text');
+        ilym.style.left = (window.innerWidth/2 - 50).toString() + 'px';
+        ilym.style.top = (window.innerHeight/2 - 10).toString() + 'px';
+
+
+
+        // Generate random stars
+        const starsContainer = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 2}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            starsContainer.appendChild(star);
+        }
+
+        const titleBar = document.querySelector('.title-bar');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        
+        titleBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - titleBar.parentElement.offsetLeft;
+            offsetY = e.clientY - titleBar.parentElement.offsetTop;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                titleBar.parentElement.style.left = `${x}px`;
+                titleBar.parentElement.style.top = `${y}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Timer logic
+        function updateTimer() {
+            const targetDate = new Date('September 3, 2023 17:00:00 GMT');
+            const currentDate = new Date();
+
+            const timeDifference = currentDate - targetDate;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerHTML = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+        }
+
+        // Add shooting star every 20 seconds
+        function addShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = `${Math.random() * 100}vw`;
+            shootingStar.style.top = `${Math.random() * 100}vh`;
+            document.body.appendChild(shootingStar);
+
+            // Remove shooting star after animation
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 1000);
+        }
+
+        const audioElement = document.getElementById('backgroundAudio');
+        let isMuted = false;
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            audioElement.muted = isMuted;
+
+            // Change the color of the button based on mute state
+            const muteButton = document.querySelector('.mute-button');
+            muteButton.style.color = isMuted ? '#ff6060' : 'white';
+        }
+
+
+        const windowContent = [
+            "<div class=\"text-timer\" id=\"text-timer\">It's been:</div><div class=\"timer\" id=\"timer\"></div>",
+            "<div class=\"text-timer\" >and yet my love for you is only getting stronger.</div>",
+            "<div class=\"text-timer\" >Every moment with you has felt like a chapter from a fairy tale</div>",
+            "<div class=\"text-timer\" >Let's look at some of these moments...</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5372.png' class='memory-photo'></div><div class='photo-caption'>from our first ever date.<br><br><div class='sub-caption'>(we got too silly)</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5353.png' class='memory-photo'></div><div class='photo-caption'>the silliest.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5427.PNG' class='memory-photo'></div><div class='photo-caption'>that poor burger got disassmebled</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5376.png' class='memory-photo'></div><div class='photo-caption'>i got to take my most favorite pic of you. <br><br><div class='sub-caption'>(right before the metro incident)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7654.png' class='memory-photo'></div><div class='photo-caption'>and then came our second date. <br><br><div class='sub-caption'>(no im not deleting this pic)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5428.png' class='memory-photo'></div><div class='photo-caption'>???<br>who sits like that bro</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7678.png' class='memory-photo'></div><div class='photo-caption'>frog purse :p</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7680.png' class='memory-photo'></div><div class='photo-caption'>:) :)</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7735.png' class='memory-photo'></div><div class='photo-caption'>oreo and omelette :3</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7722.png' class='memory-photo'></div><div class='photo-caption'>i just want you to know that i had no idea what you were talking about here</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7713.png' class='memory-photo'></div><div class='photo-caption'>:p</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_7689.png' class='memory-photo'></div><div class='photo-caption'>i won here</div>",
+            "<div class='frame'> <img src='assets/gif/water.gif' class='memory-photo'></div><div class='photo-caption'>hydration break😠<br><br> go drink some water!</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2277.png' class='memory-photo'></div><div class='photo-caption'>now the wahren trip hehe</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2290.png' class='memory-photo'></div><div class='photo-caption'>i love how fast your mood lightes up when you eat </div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2295.png' class='memory-photo'></div><div class='photo-caption'>i won here too</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2301.png' class='memory-photo'></div><div class='photo-caption'>my child fr</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2314.png' class='memory-photo'></div><div class='photo-caption'>remember when you met your doppelganger</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2331.png' class='memory-photo'></div><div class='photo-caption'>ya khouya you really cant stay still for a pic</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2395.png' class='memory-photo'></div><div class='photo-caption'>ill always love how goofy you are</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2478.png' class='memory-photo'></div><div class='photo-caption'>yup, the goofiest</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2494.png' class='memory-photo'></div><div class='photo-caption'>oh yeah definitely.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2530.png' class='memory-photo'></div><div class='photo-caption'>hadi kash nhar nchrihalk</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2483.png' class='memory-photo'></div><div class='photo-caption'>i love you baby and i'll always appreciate you</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2967.png' class='memory-photo'></div><div class='photo-caption'>hadi ghi bghit nhotha hna</div>",
+            "<div class=\"text-timer\" >Here's to countless more months of creating beautiful memories together.<br><br> Happy anniversary, my love</div>",
+            "<div class=\"text-timer\" ><br><br>I LOVE YOUUUUUU  <br><br><div class='sub-caption'>...more</div></div>",
+        ];
+
+        const images = [
+            "assets/gif/hk_daniel.gif",
+            "assets/gif/cr_balloon.gif",
+            "assets/gif/mug_hk.gif",
+            "assets/gif/cr.gif",
+            "assets/gif/dance_hk.gif",
+            "assets/gif/keroppi_pond.gif",
+            "assets/gif/keroppi.gif",
+            "assets/gif/pompom.gif",
+            "assets/gif/sanrio.gif",
+            "assets/gif/snow_cr.gif",
+            "assets/gif/starwberry_hk.gif",
+            "assets/gif/hk_cake.webp",
+            "assets/gif/badtz_silly.gif",
+            "assets/gif/cr_icecream.gif",
+            "assets/gif/dance_hk.gif",
+            "assets/gif/hk_christmas.gif",
+            "assets/gif/badtz.gif",
+            "assets/gif/hk_cloud.webp",
+            "assets/gif/my_melody.gif",
+            "assets/gif/hk_tea.gif",
+            "assets/gif/hk_mad.gif",
+        ];
+
+        let currentWindowIndex = 0;
+        const maxIndex = 31;
+
+
+        function nextWindow() {
+            currentWindowIndex = (currentWindowIndex + 1) % windowContent.length;
+            updateWindowContent();
+        }
+
+        function prevWindow() {
+            currentWindowIndex = (currentWindowIndex - 1 + windowContent.length) % windowContent.length;
+            updateWindowContent();
+        }
+
+        function updateWindowContent() {
+            // Update the content of the window based on the current index
+            const windowContentDiv = document.getElementById('window-content');
+            const prevButton = document.getElementById('previous-button');
+            const nextButton = document.getElementById('next-button');
+            const img = document.querySelector('.image');
+
+            if (windowContentDiv) {
+                windowContentDiv.innerHTML = windowContent[currentWindowIndex];
+                img.src = images[currentWindowIndex%21];
+
+                prevButton.style.display = currentWindowIndex >= 1 ? 'block' : 'none';
+                nextButton.style.display = currentWindowIndex < maxIndex ? 'block' : 'none';
+            }
+        }
+        
+        // Initialize window content
+        updateWindowContent();
+
+
+        // Update timer every second
+        setInterval(updateTimer, 1000);
+
+        // Add shooting star every 20 seconds
+        setInterval(addShootingStar, 20000);
+
+        // Minimize and close window functions
+        function minimizeWindow() {
+            // Add your minimize window logic here
+        }
+
+        function closeWindow() {
+            // Add your close window logic here
+        }
+    </script>
+</body>
+</html>
