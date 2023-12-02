@@ -300,6 +300,25 @@
             isDragging = false;
         });
 
+        titleBar.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - titleBar.parentElement.offsetLeft;
+            offsetY = e.clientY - titleBar.parentElement.offsetTop;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                titleBar.parentElement.style.left = `${x}px`;
+                titleBar.parentElement.style.top = `${y}px`;
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
         // Timer logic
         function updateTimer() {
             const targetDate = new Date('September 3, 2023 17:00:00 GMT');
