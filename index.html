@@ -280,44 +280,33 @@
         let isDragging = false;
         let offsetX, offsetY;
 
-        
-        titleBar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - titleBar.parentElement.offsetLeft;
-            offsetY = e.clientY - titleBar.parentElement.offsetTop;
-        });
+        titleBar.addEventListener('mousedown', startDragging);
+        titleBar.addEventListener('touchstart', startDragging);
 
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', dragWindow);
+        document.addEventListener('touchmove', dragWindow);
+
+        document.addEventListener('mouseup', stopDragging);
+        document.addEventListener('touchend', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            offsetX = e.type === 'mousedown' ? e.clientX - titleBar.parentElement.offsetLeft : e.touches[0].clientX - titleBar.parentElement.offsetLeft;
+            offsetY = e.type === 'mousedown' ? e.clientY - titleBar.parentElement.offsetTop : e.touches[0].clientY - titleBar.parentElement.offsetTop;
+        }
+
+        function dragWindow(e) {
             if (isDragging) {
-                const x = e.clientX - offsetX;
-                const y = e.clientY - offsetY;
+                const x = e.type === 'mousemove' ? e.clientX - offsetX : e.touches[0].clientX - offsetX;
+                const y = e.type === 'mousemove' ? e.clientY - offsetY : e.touches[0].clientY - offsetY;
                 titleBar.parentElement.style.left = `${x}px`;
                 titleBar.parentElement.style.top = `${y}px`;
             }
-        });
+        }
 
-        document.addEventListener('mouseup', () => {
+        function stopDragging() {
             isDragging = false;
-        });
-
-        titleBar.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - titleBar.parentElement.offsetLeft;
-            offsetY = e.clientY - titleBar.parentElement.offsetTop;
-        });
-
-        document.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                const x = e.clientX - offsetX;
-                const y = e.clientY - offsetY;
-                titleBar.parentElement.style.left = `${x}px`;
-                titleBar.parentElement.style.top = `${y}px`;
-            }
-        });
-
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
+        }
 
         // Timer logic
         function updateTimer() {
