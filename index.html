@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>:3</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
     <style>
         body {
             margin: 0;
@@ -41,8 +42,10 @@
 
         .window {
             position: absolute;
-            width: 600px;
-            height: 400px;
+            width: 90vw; /* Adjusted width for better mobile view */
+            max-width: 600px; /* Set maximum width for larger screens */
+            height: 60vh; /* Adjusted height for better mobile view */
+            max-height: 400px; /* Set maximum height for larger screens */
             background-color: #c0c0c0;
             border: 2px solid #c0c0c0;
             border-radius: 5px;
@@ -150,7 +153,6 @@
             position: absolute;
             bottom: 75px;
             left: 50px;
-            /* width: 150px; */
             border: 3px solid #ccc;
             background: #eee;
             margin: auto;
@@ -201,13 +203,24 @@
                 opacity: 0;
             }
         }
+
+        @media only screen and (max-width: 600px) {
+            .text-timer {
+                font-size: 20px; /* Adjust the font size for mobile view */
+            }
+            
+
+            .photo-caption {
+                font-size: 15px; /* Adjust font size for mobile view */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="stars"></div>
 
     <div id="hidden-text">
-        i miss you more.
+        i miss you so much
     </div>
 
     <div class="window">
@@ -267,25 +280,33 @@
         let isDragging = false;
         let offsetX, offsetY;
 
-        
-        titleBar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - titleBar.parentElement.offsetLeft;
-            offsetY = e.clientY - titleBar.parentElement.offsetTop;
-        });
+        titleBar.addEventListener('mousedown', startDragging);
+        titleBar.addEventListener('touchstart', startDragging);
 
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', dragWindow);
+        document.addEventListener('touchmove', dragWindow);
+
+        document.addEventListener('mouseup', stopDragging);
+        document.addEventListener('touchend', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            offsetX = e.type === 'mousedown' ? e.clientX - titleBar.parentElement.offsetLeft : e.touches[0].clientX - titleBar.parentElement.offsetLeft;
+            offsetY = e.type === 'mousedown' ? e.clientY - titleBar.parentElement.offsetTop : e.touches[0].clientY - titleBar.parentElement.offsetTop;
+        }
+
+        function dragWindow(e) {
             if (isDragging) {
-                const x = e.clientX - offsetX;
-                const y = e.clientY - offsetY;
+                const x = e.type === 'mousemove' ? e.clientX - offsetX : e.touches[0].clientX - offsetX;
+                const y = e.type === 'mousemove' ? e.clientY - offsetY : e.touches[0].clientY - offsetY;
                 titleBar.parentElement.style.left = `${x}px`;
                 titleBar.parentElement.style.top = `${y}px`;
             }
-        });
+        }
 
-        document.addEventListener('mouseup', () => {
+        function stopDragging() {
             isDragging = false;
-        });
+        }
 
         // Timer logic
         function updateTimer() {
@@ -336,10 +357,10 @@
             "<div class=\"text-timer\" >Let's look at some of these moments...</div>",
             "<div class='frame'> <img src='assets/memories/IMG_5372.png' class='memory-photo'></div><div class='photo-caption'>from our first ever date.<br><br><div class='sub-caption'>(we got too silly)</div>",
             "<div class='frame'> <img src='assets/memories/IMG_5353.png' class='memory-photo'></div><div class='photo-caption'>the silliest.</div>",
-            "<div class='frame'> <img src='assets/memories/IMG_5427.PNG' class='memory-photo'></div><div class='photo-caption'>that poor burger got disassmebled</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5427.PNG' class='memory-photo'></div><div class='photo-caption'>that poor burger got disassemebled</div>",
             "<div class='frame'> <img src='assets/memories/IMG_5376.png' class='memory-photo'></div><div class='photo-caption'>i got to take my most favorite pic of you. <br><br><div class='sub-caption'>(right before the metro incident)</div></div>",
             "<div class='frame'> <img src='assets/memories/IMG_7654.png' class='memory-photo'></div><div class='photo-caption'>and then came our second date. <br><br><div class='sub-caption'>(no im not deleting this pic)</div></div>",
-            "<div class='frame'> <img src='assets/memories/IMG_5428.png' class='memory-photo'></div><div class='photo-caption'>???<br>who sits like that bro</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_5428.PNG' class='memory-photo'></div><div class='photo-caption'>???<br>who sits like that bro</div>",
             "<div class='frame'> <img src='assets/memories/IMG_7678.png' class='memory-photo'></div><div class='photo-caption'>frog purse :p</div>",
             "<div class='frame'> <img src='assets/memories/IMG_7680.png' class='memory-photo'></div><div class='photo-caption'>:) :)</div>",
             "<div class='frame'> <img src='assets/memories/IMG_7735.png' class='memory-photo'></div><div class='photo-caption'>oreo and omelette :3</div>",
@@ -348,7 +369,7 @@
             "<div class='frame'> <img src='assets/memories/IMG_7689.png' class='memory-photo'></div><div class='photo-caption'>i won here</div>",
             "<div class='frame'> <img src='assets/gif/water.gif' class='memory-photo'></div><div class='photo-caption'>hydration break😠<br><br> go drink some water!</div>",
             "<div class='frame'> <img src='assets/memories/IMG_2277.png' class='memory-photo'></div><div class='photo-caption'>now the wahren trip hehe</div>",
-            "<div class='frame'> <img src='assets/memories/IMG_2290.png' class='memory-photo'></div><div class='photo-caption'>i love how fast your mood lightes up when you eat </div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2290.png' class='memory-photo'></div><div class='photo-caption'>i love how fast your mood lightens up when you eat </div>",
             "<div class='frame'> <img src='assets/memories/IMG_2295.png' class='memory-photo'></div><div class='photo-caption'>i won here too</div>",
             "<div class='frame'> <img src='assets/memories/IMG_2301.png' class='memory-photo'></div><div class='photo-caption'>my child fr</div>",
             "<div class='frame'> <img src='assets/memories/IMG_2314.png' class='memory-photo'></div><div class='photo-caption'>remember when you met your doppelganger</div>",
@@ -358,7 +379,7 @@
             "<div class='frame'> <img src='assets/memories/IMG_2494.png' class='memory-photo'></div><div class='photo-caption'>oh yeah definitely.</div>",
             "<div class='frame'> <img src='assets/memories/IMG_2530.png' class='memory-photo'></div><div class='photo-caption'>hadi kash nhar nchrihalk</div>",
             "<div class='frame'> <img src='assets/memories/IMG_2483.png' class='memory-photo'></div><div class='photo-caption'>i love you baby and i'll always appreciate you</div>",
-            "<div class='frame'> <img src='assets/memories/IMG_2967.png' class='memory-photo'></div><div class='photo-caption'>hadi ghi bghit nhotha hna</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2967.PNG' class='memory-photo'></div><div class='photo-caption'>hadi ghi bghit nhotha hna</div>",
             "<div class=\"text-timer\" >Here's to countless more months of creating beautiful memories together.<br><br> Happy anniversary, my love</div>",
             "<div class=\"text-timer\" ><br><br>I LOVE YOUUUUUU  <br><br><div class='sub-caption'>...more</div></div>",
         ];
@@ -388,7 +409,7 @@
         ];
 
         let currentWindowIndex = 0;
-        const maxIndex = 31;
+        const maxIndex = 30;
 
 
         function nextWindow() {
@@ -422,6 +443,7 @@
 
 
         // Update timer every second
+        updateTimer();
         setInterval(updateTimer, 1000);
 
         // Add shooting star every 20 seconds
