@@ -441,6 +441,13 @@
             "assets/gif/my_melody.gif",
             "assets/gif/hk_tea.gif",
             "assets/gif/hk_mad.gif",
+            "assets/gif/cr_heart.gif",
+            "assets/gif/cr_1.gif",
+            "assets/gif/cheer.gif",
+            "assets/gif/cr_heart_2.gif",
+            "assets/gif/pom.gif",
+            "assets/gif/pom_2.gif",
+            "assets/gif/pom_crying.gif",
         ];
 
         let currentWindowIndex = 0;
@@ -465,7 +472,7 @@
 
             if (windowContentDiv) {
                 windowContentDiv.innerHTML = windowContent[currentWindowIndex];
-                img.src = images[currentWindowIndex%21];
+                img.src = images[currentWindowIndex%images.length];
 
                 prevButton.style.display = currentWindowIndex >= 1 ? 'block' : 'none';
                 nextButton.style.display = currentWindowIndex < maxIndex ? 'block' : 'none';
