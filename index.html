@@ -220,7 +220,7 @@
     <div class="stars"></div>
 
     <div id="hidden-text">
-        i miss you so much
+        i'll miss you more
     </div>
 
     <div class="window">
@@ -390,8 +390,33 @@
             "<div class='frame'> <img src='assets/memories/IMG_0935.jpg' class='memory-photo'></div><div class='photo-caption'>LOOK AT US 🫶</div>",
             "<div class='frame'> <img src='assets/memories/IMG_7713.jpg' class='memory-photo'></div><div class='photo-caption'>baby what were you even doing</div>",
             "<div class='frame'> <img src='assets/memories/IMG_0973.jpg' class='memory-photo'></div><div class='photo-caption'>i love you omri.<br>i already miss your presence so much</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1371.jpg' class='memory-photo'></div><div class='photo-caption'>HI AGAIN POOKITA</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1347.jpg' class='memory-photo'></div><div class='photo-caption'>and.. we met again :3<div class='sub-caption'><br><br>(we stayed so strong)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1007.jpg' class='memory-photo'></div><div class='photo-caption'>and of course this is one of the few first pics you take of me.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1121.jpg' class='memory-photo'></div><div class='photo-caption'>i missed having you so close to me</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_0974.jpg' class='memory-photo'></div><div class='photo-caption'>i missed you REFUSING to stay still for pics</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1105.jpg' class='memory-photo'></div><div class='photo-caption'>i missed acting ki lma7gor</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1353.jpg' class='memory-photo'></div><div class='photo-caption'>i missed walking behind you just to see your pretty hair.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2002.jpg' class='memory-photo'></div><div class='photo-caption'>i missed feeding you and watching your mood get better with every bite.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2015.jpg' class='memory-photo'></div><div class='photo-caption'>i missed your overly agressive side eyes<div class='sub-caption'><br><br>(sorry)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1385.jpg' class='memory-photo'></div><div class='photo-caption'>im so glad that i got to see you again,</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1485.jpg' class='memory-photo'></div><div class='photo-caption'>to hold your hand again...</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1302.jpg' class='memory-photo'></div><div class='photo-caption'>to pet cats with you again...</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1483.jpg' class='memory-photo'></div><div class='photo-caption'>to buy you one more flower...</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1005.jpg' class='memory-photo'></div><div class='photo-caption'>im glad that we got to experience new things too.<div class='sub-caption'><br><br>(random pic of our feet)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1433.jpg' class='memory-photo'></div><div class='photo-caption'>going to a museum with you was so nice</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1453.jpg' class='memory-photo'></div><div class='photo-caption'>and so... silly.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1193.jpg' class='memory-photo'></div><div class='photo-caption'>i loved being enslaved</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2236.png' class='memory-photo'></div><div class='photo-caption'>i loved when you invited me over.</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1995.jpg' class='memory-photo'></div><div class='photo-caption'>i got to see your silly little room<div class='sub-caption'><br><br>(not howl i hate him)</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2237.png' class='memory-photo'></div><div class='photo-caption'>i was also sexually assaulted but yeah</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_2090.jpg' class='memory-photo'></div><div class='photo-caption'>i loved the legos so much</div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1289.jpg' class='memory-photo'></div><div class='photo-caption'>i definitely loved the crying sessions.<div class='sub-caption'><br><br>(no i didnt)</div></div>",
+            "<div class=\"text-timer\" >and most importantly, i loved kissing every single freckle you have.</div>",
             "<div class=\"text-timer\" >Here's to countless more months of creating beautiful memories together.<br><br> Happy anniversary, my love</div>",
-            "<div class=\"text-timer\" ><br><br>I LOVE YOUUUUUU  <br><br><div class='sub-caption'>...more</div></div>",
+            "<div class=\"text-timer\" <br>I love making you smile,<br><br> i love you.  <br><br><div class='sub-caption'>...more</div></div>",
+            "<div class='frame'> <img src='assets/memories/IMG_1344.jpg' class='memory-photo'></div><div class='photo-caption'>USSSSSSSSS.</div>",
+
         ];
 
         const images = [
@@ -419,7 +444,7 @@
         ];
 
         let currentWindowIndex = 0;
-        const maxIndex = windowContent.length;
+        const maxIndex = windowContent.length - 1;
 
 
         function nextWindow() {
@@ -433,7 +458,6 @@
         }
 
         function updateWindowContent() {
-            // Update the content of the window based on the current index
             const windowContentDiv = document.getElementById('window-content');
             const prevButton = document.getElementById('previous-button');
             const nextButton = document.getElementById('next-button');
@@ -448,7 +472,6 @@
             }
         }
         
-        // Initialize window content
         updateWindowContent();
 
         // Skip to specific panel
@@ -460,7 +483,7 @@
 
         // skip button 
         function onSkip(){
-            skipTo(28);
+            skipTo(38);
         }
 
 
@@ -477,11 +500,9 @@
 
         // Minimize and close window functions
         function minimizeWindow() {
-            // Add your minimize window logic here
         }
 
         function closeWindow() {
-            // Add your close window logic here
         }
     </script>
 </body>
